@@ -54,7 +54,7 @@ echo "1). Hardlink latest repository rpms to ./archive/${snap_date}"
 rsync -az --delete --include="*.rpm" --include="*/" --exclude="*" --link-dest=${src} ${src}/ ${dst}
 exitcode=$?
 if [ ! ${exitcode} -eq 0 ]; then
-  echo "ERROR: rsync completed with error code: ${exitcode}"
+  echo "ERROR: rsync completed with error code: ${exitcode}" 1>&2
   exit 1
 fi
 
@@ -62,7 +62,7 @@ echo "2). Copy all other files in latest repository to ./archive/${snap_date}"
 rsync -az --delete --exclude "*.rpm" ${src}/ ${dst}
 exitcode=$?
 if [ ! ${exitcode} -eq 0 ]; then
-  echo "ERROR: rsync completed with error code: ${exitcode}"
+  echo "ERROR: rsync completed with error code: ${exitcode}" 1>&2
   exit 1
 fi
 
